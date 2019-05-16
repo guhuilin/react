@@ -1,24 +1,20 @@
-import { observable, action } from 'mobx';
+import { observable, action } from "mobx";
+import { resolve } from "dns";
 
-export default class Count {
-  @observable count;
+export default class Count{ 
+    @observable count;
 
-  // 初始化
-  constructor() {
-    this.count = 1000;
-  }
+    // 初始化
+    constructor(){
+        this.count = 1000;
+    }
 
-  // @action changeCount(type) {
-  // type == '+' ? this.count++ : this/count --
-  // }
+    changeCount(type) {
+      type === '+' ? this.count ++ : this.count --
+    }
 
-  @action autoAdd() {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        this.count ++;
-        resolve(this.count);
-      })
-    }, 1000)
-  }
+    @action async autoAdd(type) {
+        await this.changeCount(type);
+    }
 
-}
+}   
