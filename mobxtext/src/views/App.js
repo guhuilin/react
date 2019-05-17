@@ -1,9 +1,8 @@
 import React from 'react';
-import './App.css';
-// import {inject, observer} from 'mobx-react'
+import './App.scss';
 import { inject, observer } from 'mobx-react';
 
-@inject('count')
+@inject('count', 'index')
 @observer
 
 class App extends React.Component {
@@ -11,20 +10,46 @@ class App extends React.Component {
     let { count } = this.props;
     count.autoAdd(type);
   }
+  componentDidMount() {
+    let { index } = this.props;
+    index.getAllData();
+  }
   render() {
-    console.log(this.props)
-    let { count } = this.props;
+    let { index } = this.props;
     return (
       <div className="wrapper">
-        <header className="header"></header>
         <section>
-          这就是一个页面
-          试试mobx <br />
-          <button onClick={()=>this.changeCount('+')}>+</button>
-          <p>{count.count}</p>
-          <button onClick={()=>this.changeCount('-')}>-</button>
+          <div className="cont">
+            {
+              index.allData && Object.keys(index.allData).map((item, ind) => (
+                <div className="content" key={ind}>
+                  <p>{item}</p>
+                  <ul>
+                    {
+                      index.allData[item].map((val,key)=>(
+                        <li key={key}>
+                          <p><img src={val.CoverPhoto} alt="" /></p>
+                          <span>{val.Name}</span>
+                        </li>
+                      ))
+                    }
+                  </ul>
+                </div>
+                
+              ))
+            }
+          </div>
+          <div className="right">
+            {
+              index.dataRight && index.dataRight.map((item, ind) => (
+                <span key={ind}>{item}</span>
+              ))
+            }
+          </div>
+          <aside className="slide">
+            
+          </aside>
         </section>
-        <footer></footer>
       </div>
     );
   }
