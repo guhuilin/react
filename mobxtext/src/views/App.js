@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.scss';
 import { inject, observer } from 'mobx-react';
+import List from '../components/List'
 
 @inject('count', 'index')
 @observer
@@ -14,6 +15,16 @@ class App extends React.Component {
     let { index } = this.props;
     index.getAllData();
   }
+  scrollTo(item) {
+    // 对应id的话, 滚动到相应位置
+    if (!!item) {
+      let itemElement = this.refs[item];
+      if (itemElement) {
+        window.scrollTo(0, itemElement.offsetTop+334 - window.innerHeight / 2);
+      }
+    }
+  }
+
   render() {
     let { index } = this.props;
     return (
@@ -22,27 +33,17 @@ class App extends React.Component {
           <div className="cont">
             {
               index.allData && Object.keys(index.allData).map((item, ind) => (
-                <div className="content" key={ind}>
+                <div className="content" id={item} key={ind} ref={item}>
                   <p>{item}</p>
-                  <ul>
-                    {
-                      index.allData[item].map((val,key)=>(
-                        <li key={key}>
-                          <p><img src={val.CoverPhoto} alt="" /></p>
-                          <span>{val.Name}</span>
-                        </li>
-                      ))
-                    }
-                  </ul>
+                  <List data={index.allData[item]} />
                 </div>
-                
               ))
             }
           </div>
           <div className="right">
             {
               index.dataRight && index.dataRight.map((item, ind) => (
-                <span key={ind}>{item}</span>
+                <span key={ind} onClick={()=>this.scrollTo(item)}>{item}</span>
               ))
             }
           </div>

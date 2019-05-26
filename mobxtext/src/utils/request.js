@@ -1,9 +1,10 @@
 import axios from 'axios'
 // import { getToken } from '@/utils/auth'
 
+
 // create an axios instance
 const service = axios.create({
-  // baseURL: 'http://169.254.12.55:7001', // api 的 base_url
+  // baseURL: 'http://169.254.8.141:59046/', // api 的 base_url
 
   // baseURL: '/api',
   // baseURL: /jasonandjay\.com/.test(window.location.host)?'https://exam.jasonandjay.com/': 'http://169.254.12.55:7001',
@@ -35,6 +36,7 @@ service.interceptors.response.use(
    * If you want to get information such as headers or status
    * Please return  response => response
   */
+
   /**
    * 下面的注释为通过在response里，自定义code来标示请求状态
    * 当code返回如下情况则说明权限有问题，登出并返回到登录页

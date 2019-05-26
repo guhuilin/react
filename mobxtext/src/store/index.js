@@ -10,7 +10,8 @@ const index = new Index();
 
 // 追踪数据变化
 autorun(() => {
-  console.log('count变成了...',index.data);
+  console.log('count变成了...',count);
+  console.log('index变成了...',index);
 })
 
 export default {
