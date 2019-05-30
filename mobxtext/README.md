@@ -1,3 +1,6 @@
+## 此react相关
+`mobx`
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
